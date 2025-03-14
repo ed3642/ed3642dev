@@ -62,6 +62,12 @@ const GameOfLife: React.FC = () => {
     setGrid(newGrid)
   }
 
+  const handleCreateRandom = (): void => {
+    const newGrid = grid.map((row) => row.map(() => (Math.random() > 0.7 ? 1 : 0))) // 30% chance of being alive
+
+    setGrid(newGrid)
+  }
+
   const handleReset = (): void => {
     setGrid(initialGridMemo)
     handleStop()
@@ -96,6 +102,9 @@ const GameOfLife: React.FC = () => {
       <div className="flex items-center my-2 space-x-2">
         <Button variant="secondary" onClick={updateGrid} disabled={isRunning}>
           Next
+        </Button>
+        <Button variant="secondary" onClick={handleCreateRandom} disabled={isRunning}>
+          Random
         </Button>
         <Button onClick={handleRun} disabled={isRunning}>
           Run
