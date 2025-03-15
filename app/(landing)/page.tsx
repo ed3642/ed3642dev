@@ -21,7 +21,7 @@ const LandingPage = () => {
           </h1>
           <div className="space-y-4 sm:space-y-6">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl bg-gradient-to-r from-purple-600 to-blue-700 text-white px-2 sm:px-4 p-1 sm:p-2 rounded-md pb-2 sm:pb-4 w-fit">
-              🚀 Building Stuff For Fun 🚀
+              🚀 Building The Web 🚀
             </div>
           </div>
           <div className="text-center">
@@ -79,7 +79,7 @@ const LandingPage = () => {
             <div className="flex flex-col md:flex-row items-center justify-center md:space-y-0 md:space-x-6">
               <div className="w-full md:w-1/3 flex justify-center">
                 <Image
-                  src="/media/duck.jpg"
+                  src="/media/me.webp"
                   width={200}
                   height={200}
                   alt="My Profile Pic"

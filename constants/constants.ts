@@ -9,19 +9,27 @@ export const myWork = [
   {
     title: 'AssistList',
     description:
-      'I worked one of my summers for this NFP, revamped their homepage in collaboration with designers and improved some internal tools.',
-    image_path: '/media/assistlist-sc.jpeg',
+      'Revamped the homepage in collaboration with designers and improved some internal tools for this healhcare equipment marketplace non-for-profit.',
+    image_path: '/media/assistlist-sc.webp',
     link: 'https://www.assistlist.ca/',
   },
   {
+    title: 'FC Psychotherapy',
+    description:
+      "Made a solo practitioner psychotherapy website for booking and promoting client's psychotherapy services.",
+    image_path: '/media/fc-psychotherapy.webp',
+    link: 'https://www.fabiolacelipsychotherapy.com/',
+  },
+  {
     title: 'GBA',
-    description: 'I made internal tool prototypes for this social media startup.',
-    image_path: '/media/gba-logo.png',
+    description:
+      'Made internal tool prototypes for this social media startup focused on connecting the black community.',
+    image_path: '/media/gba-logo.webp',
   },
   {
     title: 'Repurpost',
-    description: 'I made API prototypes for this online marketing startup when i was a student.',
-    image_path: '/media/repurpost-logo.jpg',
+    description: 'Made API prototypes for this online marketing startup when i was a student.',
+    image_path: '/media/repurpost-logo.webp',
   },
 ]
 
