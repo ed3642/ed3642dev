@@ -27,7 +27,7 @@ const links: Link[] = [
   },
   {
     path: '/purple-win',
-    label: 'Purple Win',
+    label: 'Purple Green',
   },
   {
     path: '/',

@@ -5,7 +5,7 @@ import { SignInHeader } from './sign-in-header'
 const GameOfLifePage: React.FC = () => {
   return (
     <div className="flex flex-col items-center w-full space-y-2">
-      <h1 className="md:max-w-screen-xl mx-auto text-5xl mt-5">Purple Equals Win</h1>
+      <h1 className="md:max-w-screen-xl mx-auto text-5xl mt-5">Purple vs Green</h1>
       <Suspense fallback={null}>
         <SignInHeader />
       </Suspense>
