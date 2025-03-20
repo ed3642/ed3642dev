@@ -25,10 +25,10 @@ const links: Link[] = [
     path: '/game-of-life',
     label: 'Game of Life',
   },
-  // {
-  //   path: '/purple-win',
-  //   label: 'Purple Win',
-  // },
+  {
+    path: '/purple-win',
+    label: 'Purple Green',
+  },
   {
     path: '/',
     label: <HomeIcon className="w-5 h-5" />,

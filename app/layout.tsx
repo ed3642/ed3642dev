@@ -8,6 +8,9 @@ import './globals.css'
 import { NavBar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { GoogleAnalytics } from '@/components/google-analytics'
+import { SessionProvider } from 'next-auth/react'
+import { Toaster } from '@/components/ui/sonner'
+import { UsernameProvider } from '@/providers/username-provider'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -32,16 +35,21 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${roboto.className} flex flex-col min-h-screen`}>
         <GoogleAnalytics />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <NavBar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <UsernameProvider>
+              <NavBar />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+              <Toaster />
+            </UsernameProvider>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   )

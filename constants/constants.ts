@@ -70,3 +70,5 @@ export const skills = {
   databases: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server'],
   methodologies: ['Kanban', 'Scrum', 'Agile'],
 }
+
+export const PURPLE_WIN_COOLDOWN = 10
