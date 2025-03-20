@@ -19,9 +19,11 @@ const COLORS = {
   0: '#4ade80', // Green
   1: '#a855f7', // Purple
 }
+
 const GRID_SIZE = 10
 
 function PurpleWin() {
+  const [cellSize, setCellSize] = useState(40)
   const [grid, setGrid] = useState<number[][]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [stats, setStats] = useState({ purple: 0, green: 0, total: 0 })
@@ -170,59 +172,56 @@ function PurpleWin() {
     }
   }
 
-  const handleCellUpdate = useCallback(
-    (cell: CellData) => {
-      if (!cell) {
-        console.error('Invalid cell data:', cell)
-        return
+  const handleCellUpdate = useCallback((cell: CellData) => {
+    if (!cell) {
+      console.error('Invalid cell data:', cell)
+      return
+    }
+
+    console.log('Received cell update:', cell)
+
+    setGrid((prev) => {
+      if (!prev.length) return prev
+      if (cell.x < 0 || cell.x >= GRID_SIZE || cell.y < 0 || cell.y >= GRID_SIZE) {
+        return prev
       }
 
-      console.log('Received cell update:', cell)
+      if (prev[cell.y][cell.x] !== cell.state) {
+        const newGrid = [...prev]
+        newGrid[cell.y][cell.x] = cell.state
+        return newGrid
+      }
 
-      setGrid((prev) => {
-        if (!prev.length) return prev
-        if (cell.x < 0 || cell.x >= GRID_SIZE || cell.y < 0 || cell.y >= GRID_SIZE) {
-          return prev
-        }
+      return prev
+    })
 
-        if (prev[cell.y][cell.x] !== cell.state) {
-          const newGrid = [...prev]
-          newGrid[cell.y][cell.x] = cell.state
-          return newGrid
-        }
+    setCellsMetadata((prev) => ({
+      ...prev,
+      [`${cell.y}-${cell.x}`]: {
+        lastChangedBy: cell.lastChangedBy || 'Unknown',
+        flipCount: cell.flipCount || 0,
+        updatedAt: cell.updatedAt || new Date().toISOString(),
+      },
+    }))
 
-        return prev
-      })
+    setGrid((prevGrid) => {
+      if (!prevGrid.length) return prevGrid
 
-      setCellsMetadata((prev) => ({
-        ...prev,
-        [`${cell.y}-${cell.x}`]: {
-          lastChangedBy: cell.lastChangedBy || 'Unknown',
-          flipCount: cell.flipCount || 0,
-          updatedAt: cell.updatedAt || new Date().toISOString(),
-        },
-      }))
-
-      setGrid((prevGrid) => {
-        if (!prevGrid.length) return prevGrid
-
-        const newStats = { purple: 0, green: 0, total: GRID_SIZE * GRID_SIZE }
-        for (let y = 0; y < GRID_SIZE; y++) {
-          for (let x = 0; x < GRID_SIZE; x++) {
-            if (prevGrid[y][x] === 1) {
-              newStats.purple++
-            } else {
-              newStats.green++
-            }
+      const newStats = { purple: 0, green: 0, total: GRID_SIZE * GRID_SIZE }
+      for (let y = 0; y < GRID_SIZE; y++) {
+        for (let x = 0; x < GRID_SIZE; x++) {
+          if (prevGrid[y][x] === 1) {
+            newStats.purple++
+          } else {
+            newStats.green++
           }
         }
+      }
 
-        setStats(newStats)
-        return prevGrid
-      })
-    },
-    [username]
-  )
+      setStats(newStats)
+      return prevGrid
+    })
+  }, [])
 
   // connect ably
   useEffect(() => {
@@ -298,6 +297,20 @@ function PurpleWin() {
 
   useEffect(() => {
     fetchGrid()
+  }, [])
+
+  // window resize
+  useEffect(() => {
+    const handleResize = () => {
+      const availableWidth = window.innerWidth * 0.9
+      const cellSize = Math.min(40, Math.floor(availableWidth / GRID_SIZE))
+      setCellSize(cellSize)
+    }
+
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const startTimer = () => {
@@ -476,7 +489,7 @@ function PurpleWin() {
         <SimpleGrid
           grid={grid}
           toggleCell={toggleCell}
-          cellSize={40}
+          cellSize={cellSize}
           gap={1}
           colors={COLORS}
           cellClassName="rounded-sm transition-colors duration-200"
