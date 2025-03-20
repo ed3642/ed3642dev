@@ -172,9 +172,10 @@ function PurpleWin() {
 
   const handleCellUpdate = useCallback(
     (cell: CellData) => {
-      if (!cell) return
-
-      if (cell.lastChangedBy === username) return
+      if (!cell) {
+        console.error('Invalid cell data:', cell)
+        return
+      }
 
       console.log('Received cell update:', cell)
 
