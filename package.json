@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed:purple-win": "ts-node --project tsconfig.scripts.json seed/seed-purple-win.ts"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.8.0",
@@ -44,6 +45,7 @@
     "clsx": "^2.1.1",
     "cmdk": "1.0.0",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
     "embla-carousel-react": "^8.5.2",
     "framer-motion": "^12.5.0",
     "input-otp": "^1.4.2",

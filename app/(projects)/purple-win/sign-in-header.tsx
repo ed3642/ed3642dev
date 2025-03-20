@@ -1,9 +1,9 @@
 import { SignOut } from '@/components/auth/sign-out'
-import { auth } from '@/lib/authentication/auth'
 import { SignInOptions } from '@/components/auth/sign-in-options'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { auth } from '@/lib/authentication/auth'
 
-async function SignInHeader() {
+const SignInHeader = async () => {
   const session = await auth()
 
   if (!session?.user)

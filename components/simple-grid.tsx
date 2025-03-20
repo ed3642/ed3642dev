@@ -16,6 +16,7 @@ interface SimpleGridProps {
   cellClassName?: string
   onTouchStart?: (rowIndex: number, colIndex: number) => void
   draggedCell?: { type: COLORS; i: number; j: number } | null
+  cellRenderer?: (rowIndex: number, colIndex: number, color: string) => React.ReactNode
 }
 
 const SimpleGrid: React.FC<SimpleGridProps> = ({
@@ -31,6 +32,7 @@ const SimpleGrid: React.FC<SimpleGridProps> = ({
   cellClassName,
   onTouchStart,
   draggedCell,
+  cellRenderer,
 }) => {
   const gridTemplateColumns = `repeat(${grid[0].length}, ${cellSize}px)`
   const gridTemplateRows = `repeat(${grid.length}, ${cellSize}px)`
@@ -47,36 +49,44 @@ const SimpleGrid: React.FC<SimpleGridProps> = ({
         >
           {grid.map((row: number[], i: number) => (
             <div key={i} className="contents">
-              {row.map((value: number, j: number) => (
-                <div
-                  key={j}
-                  className={`box-border ${
-                    draggableValues?.includes(value) ? 'cursor-grab' : 'cursor-pointer'
-                  }`}
-                  style={{
-                    width: `${cellSize}px`,
-                    height: `${cellSize}px`,
-                    padding: `${gap}px`,
-                  }}
-                  onClick={() => toggleCell(i, j)}
-                  draggable={draggableValues?.includes(value)}
-                  onDragStart={onDragStart ? () => onDragStart(i, j) : undefined}
-                  onDragOver={onDragOver ? (e) => onDragOver(e) : undefined}
-                  onDrop={onDrop ? () => onDrop(i, j) : undefined}
-                  onTouchStart={onTouchStart ? () => onTouchStart(i, j) : undefined}
-                >
+              {row.map((value: number, j: number) => {
+                const color = colors[value] || colors[0] // default to first color
+
+                return (
                   <div
-                    className={cn(
-                      'w-full h-full flex justify-center items-center',
-                      cellClassName,
-                      draggedCell?.i === i && draggedCell?.j === j ? 'brightness-50' : ''
-                    )}
+                    key={j}
+                    className={`box-border ${
+                      draggableValues?.includes(value) ? 'cursor-grab' : 'cursor-pointer'
+                    }`}
                     style={{
-                      backgroundColor: colors[value] || colors[0], // default to first color
+                      width: `${cellSize}px`,
+                      height: `${cellSize}px`,
+                      padding: `${gap}px`,
                     }}
-                  ></div>
-                </div>
-              ))}
+                    onClick={cellRenderer ? undefined : () => toggleCell(i, j)}
+                    draggable={draggableValues?.includes(value)}
+                    onDragStart={onDragStart ? () => onDragStart(i, j) : undefined}
+                    onDragOver={onDragOver ? (e) => onDragOver(e) : undefined}
+                    onDrop={onDrop ? () => onDrop(i, j) : undefined}
+                    onTouchStart={onTouchStart ? () => onTouchStart(i, j) : undefined}
+                  >
+                    {cellRenderer ? (
+                      cellRenderer(i, j, color)
+                    ) : (
+                      <div
+                        className={cn(
+                          'w-full h-full flex justify-center items-center',
+                          cellClassName,
+                          draggedCell?.i === i && draggedCell?.j === j ? 'brightness-50' : ''
+                        )}
+                        style={{
+                          backgroundColor: color,
+                        }}
+                      ></div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           ))}
         </div>
