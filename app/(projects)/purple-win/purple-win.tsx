@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { SimpleGrid } from '@/components/simple-grid'
-import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { IPurpleWinGridCell } from '@/models/purple-win'
@@ -27,7 +26,6 @@ function PurpleWin() {
   const [grid, setGrid] = useState<number[][]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [stats, setStats] = useState({ purple: 0, green: 0, total: 0 })
-  const { data: session } = useSession()
   const { username } = useUsername()
   const [cellsMetadata, setCellsMetadata] = useState<Record<string, CellMetadata>>({})
   const [realtimeStatus, setRealtimeStatus] = useState<'connected' | 'connecting' | 'offline'>(
@@ -86,11 +84,6 @@ function PurpleWin() {
   }
 
   const toggleCell = async (rowIndex: number, colIndex: number) => {
-    if (!session) {
-      toast.error('Please sign in to play')
-      return
-    }
-
     if (!canFlip) {
       toast.error('Cooldown active. Please wait before flipping another cell.')
       return
@@ -470,7 +463,6 @@ function PurpleWin() {
           <CardContent>
             <p className="text-sm text-muted-foreground">
               Click on any cell to change its color. Purple vs Green war!
-              {!session && ' Sign in to play.'}
             </p>
             <p className="text-sm text-muted-foreground mt-1">
               Hover over cells to see their history.
