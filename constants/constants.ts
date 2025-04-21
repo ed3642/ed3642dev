@@ -7,6 +7,13 @@ export const myWork = [
     link: 'https://www.miningmatch.net/',
   },
   {
+    title: 'PetPix AI',
+    description:
+      'A work in progress that allows people to make funny pictures of their pets without training a model for a long time. I am waiting for OpenAI to release their latest image generation api to perfect this service.',
+    image_path: '/media/petpixai.webp',
+    link: 'https://petpixai.com/',
+  },
+  {
     title: 'AssistList',
     description:
       'Revamped the homepage in collaboration with designers and improved some internal tools for this healhcare equipment marketplace non-for-profit.',
