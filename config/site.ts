@@ -39,5 +39,14 @@ export const siteConfig = {
     statusBarStyle: 'default',
   },
   start_url: '.',
-  keywords: ['software', 'developer', 'programming', 'web', 'webdev'],
+  keywords: [
+    'software',
+    'developer',
+    'programming',
+    'web',
+    'webdev',
+    'website',
+    'portfolio',
+    'web developer',
+  ],
 }

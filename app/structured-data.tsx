@@ -6,7 +6,7 @@ export default function StructuredData() {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: siteConfig.name,
-    image: [`${siteConfig.url}/media/web-app-manifest-192x192.png`],
+    image: [`${siteConfig.url}/media/web-app-manifest-192x192.webp`],
     url: siteConfig.url,
     description: siteConfig.description,
     address: {
@@ -14,7 +14,7 @@ export default function StructuredData() {
       addressRegion: 'Ontario',
       addressCountry: 'Canada',
     },
-    logo: `${siteConfig.url}/media/web-app-manifest-192x192.png`,
+    logo: `${siteConfig.url}/media/web-app-manifest-192x192.webp`,
   }
 
   const jsonLdString = JSON.stringify(schema)

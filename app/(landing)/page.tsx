@@ -26,7 +26,7 @@ const LandingPage = () => {
           </div>
           <div className="text-center">
             <p className="text-xl text-zinc-200">
-              I&apos;m a full-stack JavaScript developer.
+              I&apos;m a full-stack JavaScript web developer.
               <br />
               Check out the neat little projects I&apos;ve made with the navigation above, or see my
               professional work below.
