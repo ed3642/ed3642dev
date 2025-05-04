@@ -9,7 +9,7 @@ export const myWork = [
   {
     title: 'PetPix AI',
     description:
-      'A work in progress that allows people to make funny pictures of their pets without training a model for a long time. I am waiting for OpenAI to release their latest image generation api to perfect this service.',
+      'Lets people create funny and memorable AI images of their pets based on a reference image of their pet in less than 30 seconds. Im the founder and sole programmer.',
     image_path: '/media/petpixai.webp',
     link: 'https://petpixai.com/',
   },
