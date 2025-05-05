@@ -1,4 +1,4 @@
-import { Linkedin, Mail } from 'lucide-react'
+import { Instagram, Linkedin, Mail } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -20,6 +20,9 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ iconSize = 24 }) => {
           alt="Github logo"
           className="text-white"
         />
+      </Link>
+      <Link href="https://www.instagram.com/ed3642dev/" target="_blank">
+        <Instagram color="white" size={iconSize} />
       </Link>
       <Link href="mailto:ed3642dev@gmail.com" target="_blank">
         <Mail color="white" size={iconSize} />
